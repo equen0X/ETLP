@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800">
+  <defs>
+    <linearGradient id="cg" x1="0" x2="1">
+      <stop offset="0" stop-color="#FFD6A5"/>
+      <stop offset="1" stop-color="#FF9AA2"/>
+    </linearGradient>
+    <style>
+      .bg{fill:url(#cg)}
+      .title{font-family:Inter, sans-serif; font-size:56px; fill:#041E24; font-weight:700}
+      .sub{font-family:Inter, sans-serif; font-size:20px; fill:#041E24; opacity:0.85}
+    </style>
+  </defs>
+  <rect class="bg" width="1400" height="800" rx="28"/>
+  <g transform="translate(80,120)">
+    <text class="title">Cybersecurity Course</text>
+    <text class="sub" y="64">Network defense, threat analysis, and practical labs</text>
+  </g>
+  <g transform="translate(980,200)">
+    <rect width="320" height="200" rx="14" fill="#fff" opacity="0.06"/>
+    <g transform="translate(32,24)" fill="#fff" opacity="0.95">
+      <circle cx="40" cy="40" r="34" opacity="0.12"/>
+      <rect x="92" y="18" width="160" height="18" rx="8" opacity="0.08"/>
+      <rect x="92" y="48" width="110" height="12" rx="6" opacity="0.06"/>
+    </g>
+  </g>
+</svg>

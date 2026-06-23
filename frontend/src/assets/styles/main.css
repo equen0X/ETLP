@@ -1,0 +1,38 @@
+body {
+  background: #f4f7fc;
+  font-family: Arial, sans-serif;
+}
+
+.hero {
+  background: linear-gradient(
+    135deg,
+    #0d6efd,
+    #4e73df
+  );
+  color: white;
+  padding: 100px 20px;
+}
+
+.footer {
+  background: #212529;
+  color: white;
+  padding: 30px;
+  margin-top: 50px;
+}
+
+.dashboard-card {
+  transition: 0.3s;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-8px);
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+}
+
+.btn {
+  border-radius: 8px;
+}
