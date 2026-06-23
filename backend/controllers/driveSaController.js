@@ -29,11 +29,13 @@ function getDriveClient() {
     return null;
   }
 
-  const auth = new google.auth.JWT({
-    email: key.client_email,
-    key: key.private_key,
-    scopes: ["https://www.googleapis.com/auth/drive.readonly"]
-  });
+ const privateKey = key.private_key.replace(/\\n/g, "\n");
+
+const auth = new google.auth.JWT({
+  email: key.client_email,
+  key: privateKey,
+  scopes: ["https://www.googleapis.com/auth/drive.readonly"]
+});
 
   return google.drive({ version: "v3", auth });
 }
