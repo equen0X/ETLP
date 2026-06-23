@@ -43,6 +43,7 @@ const auth = new google.auth.JWT({
 });
 
 return google.drive({ version: "v3", auth });
+}
 
 exports.listFilesSA = async (req, res) => {
   const { folderId } = req.query;
