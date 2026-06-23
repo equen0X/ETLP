@@ -29,7 +29,12 @@ function getDriveClient() {
     return null;
   }
 
- const privateKey = key.private_key.replace(/\\n/g, "\n");
+const privateKey = key.private_key.replace(/\\n/g, "\n");
+
+console.log("Client Email:", key.client_email);
+console.log("Key ID:", key.private_key_id);
+console.log("Private Key Header:", privateKey.split("\n")[0]);
+console.log("Private Key Footer:", privateKey.split("\n").slice(-2, -1)[0]);
 
 const auth = new google.auth.JWT({
   email: key.client_email,
@@ -37,8 +42,7 @@ const auth = new google.auth.JWT({
   scopes: ["https://www.googleapis.com/auth/drive.readonly"]
 });
 
-  return google.drive({ version: "v3", auth });
-}
+return google.drive({ version: "v3", auth });
 
 exports.listFilesSA = async (req, res) => {
   const { folderId } = req.query;
