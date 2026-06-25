@@ -1,12 +1,23 @@
-﻿node_modules/
+﻿# Dependencies
+node_modules/
 frontend/node_modules/
 backend/node_modules/
 
+# Environment
 .env
 backend/.env
 frontend/.env
 
+# Build
 dist/
 frontend/dist/
 
+# Logs
 *.log
+
+# Google Service Account (DO NOT COMMIT)
+backend/constant-autumn-469609-a7-13ca40fd8adf.json
+gcp_key_b64.txt
+*.pem
+*.key
+# Environment

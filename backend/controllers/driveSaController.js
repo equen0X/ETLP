@@ -1,13 +1,17 @@
 const { google } = require("googleapis");
+const fs = require("fs");
+const path = require("path");
+
+const SERVICE_ACCOUNT_FILE =
+  process.env.GOOGLE_SERVICE_ACCOUNT_FILE ||
+  path.join(__dirname, "..", "constant-autumn-469609-a7-13ca40fd8adf.json");
 
 function getDriveClient() {
-  console.debug('driveSaController.getDriveClient - checking env keys');
-  console.debug('GOOGLE_SERVICE_ACCOUNT_KEY present:', !!process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
-  console.debug('GOOGLE_SERVICE_ACCOUNT_KEY_B64 present:', !!process.env.GOOGLE_SERVICE_ACCOUNT_KEY_B64);
   // Support either a direct JSON string in GOOGLE_SERVICE_ACCOUNT_KEY
   // or a base64-encoded JSON in GOOGLE_SERVICE_ACCOUNT_KEY_B64 to avoid newline escaping issues.
   let keyJson = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
   const keyB64 = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_B64;
+
   if (!keyJson && keyB64) {
     try {
       keyJson = Buffer.from(keyB64, "base64").toString("utf8");
@@ -17,9 +21,16 @@ function getDriveClient() {
     }
   }
 
-  if (!keyJson) return null;
+  if (!keyJson && fs.existsSync(SERVICE_ACCOUNT_FILE)) {
+    try {
+      keyJson = fs.readFileSync(SERVICE_ACCOUNT_FILE, "utf8");
+    } catch (e) {
+      console.error("Failed to read Google service account file", e.message);
+      return null;
+    }
+  }
 
-  console.debug('driveSaController.getDriveClient - parsed keyJson length:', (typeof keyJson === 'string') ? keyJson.length : 'object');
+  if (!keyJson) return null;
 
   let key;
   try {
@@ -30,11 +41,6 @@ function getDriveClient() {
   }
 
 const privateKey = key.private_key.replace(/\\n/g, "\n");
-
-console.log("Client Email:", key.client_email);
-console.log("Key ID:", key.private_key_id);
-console.log("Private Key Header:", privateKey.split("\n")[0]);
-console.log("Private Key Footer:", privateKey.split("\n").slice(-2, -1)[0]);
 
 const auth = new google.auth.JWT({
   email: key.client_email,
